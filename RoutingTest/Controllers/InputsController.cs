@@ -11,6 +11,7 @@ namespace RoutingTest.Controllers
         /// <summary>
         /// Receives a number and outputs the lucky version of that number (x 2)
         /// </summary>
+        /// <param name="UserInput">The number to make lucky</param>
         /// <returns>The lucky number</returns>
         /// <example>
         /// GET : api/Inputs/Lucky/206 -> 412
@@ -27,17 +28,34 @@ namespace RoutingTest.Controllers
 
 
 
-        // POST: api/Inputs/Example2 -> "Lucky is 50"
-        [HttpPost(template:"Example2")]
-        public string Example2()
+
+        /// <summary>
+        /// Receives a lucky word as POST data
+        /// </summary>
+        /// <returns>
+        /// A sentence acknowledging the lucky word
+        /// </returns>
+        /// <param name="LuckyWord">The lucky word. Must be enclosed with quotations</param>
+        /// <example>
+        /// POST: api/Inputs/Lucky
+        /// HEADER: Content-Type: application/json
+        /// FORM DATA: 'cat'
+        /// -> "Lucky word is cat"
+        /// </example>
+        /// <example>
+        /// cURL (windows)
+        /// curl -d "\"cat\"" -H "Content-Type: application/json" https://localhost:xx/api/inputs/lucky
+        /// </example>
+        [HttpPost(template:"Lucky")]
+        public string Lucky([FromBody]string LuckyWord)
         {
-            int LuckyNumber = 50;
-            return "Lucky is "+LuckyNumber;
+            return "Lucky word is "+LuckyWord;
         }
 
         /// <summary>
         /// Receives a user input and outputs the unlucky version of that number (10 less)
         /// </summary>
+        /// <param name="UserInput">The number to make unlucky</param>
         /// <returns>
         /// The unlucky number
         /// </returns>
@@ -62,10 +80,8 @@ namespace RoutingTest.Controllers
         /// <param name="SecondNumber">The second input number</param>
         /// <returns>the product of {FirstNumber}*{SecondNumber}</returns>
         /// <example>
-        /// GET: api/Inputs/Multiply/5/10 -> 50
-        //  GET: api/Inputs/Multiply/5/9 -> 45
-
         /// GET: api/Inputs/Multiply?FirstNumber=5&SecondNumber=9 -> 45
+        /// GET: api/Inputs/Multiply?FirstNumber=0&SecondNumber=0 -> 0
         /// </example>
         [HttpGet(template:"Multiply")]
         public int Multiply(int FirstNumber, int SecondNumber)
