@@ -39,7 +39,7 @@ namespace RoutingTest.Controllers
         /// <example>
         /// POST: api/Inputs/Lucky
         /// HEADER: Content-Type: application/json
-        /// FORM DATA: 'cat'
+        /// FORM DATA: "cat"
         /// -> "Lucky word is cat"
         /// </example>
         /// <example>
